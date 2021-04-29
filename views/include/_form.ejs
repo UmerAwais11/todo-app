@@ -1,0 +1,42 @@
+ <!-- form handling -->
+ <form action="/api/todos" method="POST" id="add_todotask">
+    <div class="new_user">
+        <div class="form-group">
+            <label for="name" class="text-light">Name</label>
+            <input type="hidden" name="id" value="">
+            <input type="text" name="name" value="" placeholder="Marco Reus">
+        </div>
+        <div class="form-group">
+            <label for="Description" class="text-light">Description</label>
+            <input type="text" name="description" value="" placeholder="Add the task details">
+        </div>
+        <div class="form-group">
+            <label for="priority" class="text-light">Priority</label>
+            <div class="radio inline">
+                <input type="radio" id="radio-2" name="priority" value="High" >
+                <label for="radio-2" class="radio-label">High</label>
+            </div>
+            <div class="radio inline">
+                <input type="radio" id="radio-3" name="priority" value="Low" >
+                <label for="radio-3" class="radio-label">Low</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="status" class="text-light">Status</label>
+            <div class="radio inline">
+                <input type="radio" id="radio-4" name="status" value="Working" >
+                <label for="radio-4" class="radio-label">Working</label>
+            </div>
+            <div class="radio inline">
+                <input type="radio" id="radio-5" name="status" value="Completed" >
+                <label for="radio-5" class="radio-label">Completed</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn text-dark update">Save</button>
+        </div>
+
+    </div>
+</form>

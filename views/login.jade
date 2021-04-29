@@ -1,0 +1,15 @@
+extends ../views/layouts/main
+
+block content
+  div
+    p #{session}
+    form(action='api/login',method='POST')
+      label(for='name') Name
+        input(id='name',type='text',placeholder='Name',name='name')
+      br  
+      br   
+      label(for='password') Password
+        input(id='password',type='text',placeholder='Password',name='password')
+      br
+      br  
+      input(type='submit',value='Login')

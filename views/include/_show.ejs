@@ -1,0 +1,17 @@
+<% for(var i = 0; i < todos.length; i++) { %>
+<tr>
+    <td><%= i + 1 %></td>
+    <td><%= todos[i].name %></td>
+    <td><%= todos[i].description %></td>
+    <td><%= todos[i].priority %></td>
+    <td><%= todos[i].status %></td>
+    <td>
+        <a href="/update-todotask?id=<%= todos[i]._id%>" class="btn border-shadow update">
+            <span class="text-gradient"><i class="fas fa-pencil-alt"></i></span>
+        </a>
+        <a class="btn border-shadow delete" data-id=<%= todos[i]._id%> >
+            <span class="text-gradient"><i class="fas fa-times"></i></span>
+        </a>
+    </td>
+</tr>
+<% } %>
