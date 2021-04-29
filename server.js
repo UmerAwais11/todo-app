@@ -4,7 +4,7 @@ const morgan = require("morgan");
 const bodyparser = require("body-parser");
 const path = require("path");
 const session = require("express-session");
-const myRoutes = require("./server/routes/router");
+const myRoutes = require("./HTTP/routes/router");
 
 const connectDB = require("./server/database/connection");
 
@@ -29,11 +29,9 @@ app.use(
 
 // set view engine
 app.set("view engine", "ejs");
-//app.set("views", path.resolve(__dirname, "views/ejs"))
 
 // load assets
 app.use("/css", express.static(path.resolve(__dirname, "assets/css")));
-app.use("/img", express.static(path.resolve(__dirname, "assets/img")));
 app.use("/js", express.static(path.resolve(__dirname, "assets/js")));
 
 // load routers

@@ -1,6 +1,6 @@
 const { v4 } = require("uuid");
-const todoList = require("../../model/todo");
-const TodoService = require("../../services/Todo/TodoService");
+const todoList = require("../../../server/model/todo");
+const TodoService = require("../../../server/services/Todo/TodoService");
 
 class TodoController {
   // fetch all existing todos
@@ -21,12 +21,10 @@ class TodoController {
     }
   }
 
-  // add todo task
   static addTodoTask(req, res) {
     res.render("add_todotask");
   }
 
-  // update todo task
   static async updateTodoTask(req, res) {
     try {
       const response = await TodoService.updateTodoTask(req);
@@ -38,7 +36,6 @@ class TodoController {
     }
   }
 
-  // create and save new todo-task
   static async create(req, res) {
     try {
       const todo = new todoList({
@@ -50,7 +47,6 @@ class TodoController {
       });
       const response = await TodoService.createTodoTask(todo);
       if (response) {
-        //res.send(data)
         res.redirect("/add-todotask");
       }
       return;
@@ -80,7 +76,7 @@ class TodoController {
         const todo = await TodoService.fetchAllTodos();
         if (!todo) {
           res.status(404).send({
-            message: `Cannot find todo-task. Maybe todo-task not found!`,
+            message: `Cannot find any todo-task.`,
           });
         } else {
           res.send(todo);
@@ -91,7 +87,6 @@ class TodoController {
     }
   }
 
-  // Update a new identified todo-task by task id
   static async update(req, res) {
     try {
       const id = req.params.id;
@@ -108,7 +103,6 @@ class TodoController {
     }
   }
 
-  // Delete a todo-task with specified task id in the request
   static async delete(req, res) {
     try {
       const id = req.params.id;

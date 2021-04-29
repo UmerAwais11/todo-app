@@ -23,8 +23,12 @@ class TodoService {
     }
   }
   static async createTodoTask(todo) {
-    const data = await TodoRepository.create(todo);
-    return data;
+    try {
+      const data = await TodoRepository.create(todo);
+      return data;
+    } catch (error) {
+      res.send(error);
+    }
   }
   static async fetchAllTodos() {
     try {
@@ -54,7 +58,9 @@ class TodoService {
     try {
       const data = await TodoRepository.delete(id);
       return data;
-    } catch (error) {}
+    } catch (error) {
+      res.send(error);
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 const { v4 } = require("uuid");
-const userDb = require("../../model/user");
-const UserService = require("../../services/User/UserService");
+const userDb = require("../../../server/model/user");
+const UserService = require("../../../server/services/User/UserService");
 
 class UserController {
   //redirect to login form
@@ -8,10 +8,8 @@ class UserController {
     res.render("login");
   }
 
-  // create User
   static async createUser(req, res) {
     try {
-      // new user
       const user = new userDb({
         id: v4(),
         name: req.body.name,
@@ -27,7 +25,6 @@ class UserController {
       });
     }
   }
-  // retrieve and return user
   static async findUser(req, res) {
     //const{name : username , password}= req.body
     try {
