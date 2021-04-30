@@ -1,6 +1,6 @@
 const { v4 } = require("uuid");
-const todoList = require("../../../server/model/todo");
-const TodoService = require("../../../server/services/Todo/TodoService");
+const todoList = require("../../../App/database/model/todo");
+const TodoService = require("../../../App/services/Todo/todoService");
 
 class TodoController {
   // fetch all existing todos

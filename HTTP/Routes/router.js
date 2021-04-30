@@ -1,7 +1,7 @@
 const express = require("express");
 const route = express.Router();
-const TodoController = require("../../HTTP/controller/Todo/index");
-const UserController = require("../../HTTP/controller/User/index");
+const TodoController = require("../Controller/Todo/index");
+const UserController = require("../Controller/User/index");
 
 // APIs
 route.get("/", TodoController.homeRoutes);

@@ -1,17 +1,20 @@
 const { v4 } = require("uuid");
-const userDb = require("../model/user");
-const todoList = require("../model/todo");
+const userDb = require("../database/model/user");
+const todoList = require("../database/model/todo");
 
 class TodoRepository {
-  static async create(todo) {
+  //create
+  static async add(todo) {
     const data = await todoList.create(todo);
     return data;
   }
-  static async fetchAllTodos() {
+  //fetchAllTodos
+  static async fetchAll() {
     const todo = await todoList.find();
     return todo;
   }
-  static async findById(id) {
+  //findById
+  static async fetchByToDoId(id) {
     const todo = await todoList.findById(id);
     return todo;
   }
@@ -21,7 +24,8 @@ class TodoRepository {
     });
     return data;
   }
-  static async delete(id) {
+  //delete
+  static async remove(id) {
     const data = await todoList.findByIdAndDelete(id);
     return data;
   }

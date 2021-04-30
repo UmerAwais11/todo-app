@@ -1,6 +1,6 @@
 const { v4 } = require("uuid");
-const todoList = require("../../model/todo");
-const TodoRepository = require("../../repositories/TodoRepository");
+const todoList = require("../../database/model/todo");
+const store = require("../../stores/todoStore");
 const axios = require("axios");
 
 class TodoService {
@@ -24,7 +24,7 @@ class TodoService {
   }
   static async createTodoTask(todo) {
     try {
-      const data = await TodoRepository.create(todo);
+      const data = await store.add(todo);
       return data;
     } catch (error) {
       res.send(error);
@@ -32,7 +32,7 @@ class TodoService {
   }
   static async fetchAllTodos() {
     try {
-      const todo = await TodoRepository.fetchAllTodos();
+      const todo = await store.fetchAll();
       return todo;
     } catch (error) {
       res.send(error);
@@ -40,7 +40,7 @@ class TodoService {
   }
   static async fetchTodoById(id) {
     try {
-      const todo = await TodoRepository.findById(id);
+      const todo = await store.fetchByToDoId(id);
       return todo;
     } catch (error) {
       res.send(error);
@@ -48,7 +48,7 @@ class TodoService {
   }
   static async updateTodo(id, req) {
     try {
-      const data = await TodoRepository.update(id, req);
+      const data = await store.update(id, req);
       return data;
     } catch (error) {
       res.send(error);
@@ -56,7 +56,7 @@ class TodoService {
   }
   static async deleteTodo(id) {
     try {
-      const data = await TodoRepository.delete(id);
+      const data = await store.remove(id);
       return data;
     } catch (error) {
       res.send(error);

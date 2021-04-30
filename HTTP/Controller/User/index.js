@@ -1,6 +1,6 @@
 const { v4 } = require("uuid");
-const userDb = require("../../../server/model/user");
-const UserService = require("../../../server/services/User/UserService");
+const userDb = require("../../../App/database/model/user");
+const UserService = require("../../../App/services/User/userService");
 
 class UserController {
   //redirect to login form

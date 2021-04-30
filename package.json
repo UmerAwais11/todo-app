@@ -1,11 +1,11 @@
 {
   "name": "crud_app",
   "version": "1.0.0",
-  "description": "TODO crud application with express and mongodb",
+  "description": "TODO app",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon ./Bin/www.js"
   },
   "keywords": [
     "crud",

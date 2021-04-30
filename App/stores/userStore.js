@@ -1,8 +1,9 @@
 const { v4 } = require("uuid");
-const userDb = require("../model/user");
+const userDb = require("../database/model/user");
 
 class UserRepository {
-  static async create(user) {
+  //create
+  static async add(user) {
     const response = await user.save(user);
     return response;
   }
