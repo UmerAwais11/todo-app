@@ -1,6 +1,6 @@
-const { v4 } = require("uuid");
-const userDb = require("../../../App/database/model/user");
-const UserService = require("../../../App/services/User/userService");
+import {v4 } from "uuid";
+import userDb from "../../../App/database/model/user";
+import UserService from "../../../App/services/User/userService";
 
 class UserController {
   //redirect to login form
@@ -42,4 +42,4 @@ class UserController {
     }
   }
 }
-module.exports = UserController;
+export default UserController;

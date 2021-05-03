@@ -1,5 +1,4 @@
-const { v4 } = require("uuid");
-const userDb = require("../database/model/user");
+import userDb from "../database/model/user";
 
 class UserRepository {
   //create
@@ -13,4 +12,4 @@ class UserRepository {
   }
 }
 
-module.exports = UserRepository;
+export default UserRepository;

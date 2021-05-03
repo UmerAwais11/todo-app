@@ -1,6 +1,4 @@
-const { v4 } = require("uuid");
-const userDb = require("../database/model/user");
-const todoList = require("../database/model/todo");
+import todoList from "../database/model/todo";
 
 class TodoRepository {
   //create
@@ -31,4 +29,4 @@ class TodoRepository {
   }
 }
 
-module.exports = TodoRepository;
+export default TodoRepository;

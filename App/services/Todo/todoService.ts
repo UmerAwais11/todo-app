@@ -1,6 +1,4 @@
-const { v4 } = require("uuid");
-const todoList = require("../../database/model/todo");
-const store = require("../../stores/todoStore");
+import store from "../../stores/todoStore";
 const axios = require("axios");
 
 class TodoService {
@@ -9,7 +7,6 @@ class TodoService {
       const response = await axios.get("http://localhost:3000/api/todos");
       return response;
     } catch (error) {
-      res.send(error);
     }
   }
   static async updateTodoTask(req) {
@@ -19,7 +16,6 @@ class TodoService {
       });
       return todoData;
     } catch (error) {
-      res.send(error);
     }
   }
   static async createTodoTask(todo) {
@@ -27,7 +23,6 @@ class TodoService {
       const data = await store.add(todo);
       return data;
     } catch (error) {
-      res.send(error);
     }
   }
   static async fetchAllTodos() {
@@ -35,7 +30,6 @@ class TodoService {
       const todo = await store.fetchAll();
       return todo;
     } catch (error) {
-      res.send(error);
     }
   }
   static async fetchTodoById(id) {
@@ -43,7 +37,6 @@ class TodoService {
       const todo = await store.fetchByToDoId(id);
       return todo;
     } catch (error) {
-      res.send(error);
     }
   }
   static async updateTodo(id, req) {
@@ -51,7 +44,6 @@ class TodoService {
       const data = await store.update(id, req);
       return data;
     } catch (error) {
-      res.send(error);
     }
   }
   static async deleteTodo(id) {
@@ -59,9 +51,8 @@ class TodoService {
       const data = await store.remove(id);
       return data;
     } catch (error) {
-      res.send(error);
     }
   }
 }
 
-module.exports = TodoService;
+export default TodoService;

@@ -1,7 +1,11 @@
-const express = require("express");
+// const express = require("express");
+// const route = express.Router();
+// const TodoController = require("../Controller/Todo/index");
+// const UserController = require("../Controller/User/index");
+import * as express from "express";
+import TodoController from "../Controller/Todo/index";
+import UserController from "../Controller/User/index";
 const route = express.Router();
-const TodoController = require("../Controller/Todo/index");
-const UserController = require("../Controller/User/index");
 
 // APIs
 route.get("/", TodoController.homeRoutes);
@@ -15,4 +19,4 @@ route.get("/api/todos", TodoController.find);
 route.put("/api/todos/:id", TodoController.update);
 route.delete("/api/todos/:id", TodoController.delete);
 
-module.exports = route;
+export default route;

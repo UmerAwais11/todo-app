@@ -1,7 +1,4 @@
-const { v4 } = require("uuid");
-const userDb = require("../../database/model/user");
-const store = require("../../stores/userStore");
-const axios = require("axios");
+import store from "../../stores/userStore";
 
 class UserService {
   static async createUser(user) {
@@ -9,7 +6,6 @@ class UserService {
       const response = await store.add(user);
       return response;
     } catch (error) {
-      res.send(error);
     }
   }
   static async findUser(req, res) {
@@ -22,4 +18,4 @@ class UserService {
   }
 }
 
-module.exports = UserService;
+export default UserService;

@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
+import * as mongoose from "mongoose";
 
 var schema = new mongoose.Schema({
   id: {
@@ -19,4 +20,4 @@ var schema = new mongoose.Schema({
 
 const todoList = mongoose.model("todolist", schema);
 
-module.exports = todoList;
+export default todoList;

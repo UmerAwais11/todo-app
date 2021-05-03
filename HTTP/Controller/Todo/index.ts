@@ -1,6 +1,7 @@
-const { v4 } = require("uuid");
-const todoList = require("../../../App/database/model/todo");
-const TodoService = require("../../../App/services/Todo/todoService");
+//const { v4 } = require("uuid");
+import { v4 } from "uuid";
+import todoList from "../../../App/database/model/todo";
+import TodoService from "../../../App/services/Todo/todoService";
 
 class TodoController {
   // fetch all existing todos
@@ -118,9 +119,9 @@ class TodoController {
       }
     } catch (err) {
       res.status(500).send({
-        message: "Could not delete todo-task with id= " + id,
+        message: "Could not delete todo-task ",
       });
     }
   }
 }
-module.exports = TodoController;
+export default TodoController;
