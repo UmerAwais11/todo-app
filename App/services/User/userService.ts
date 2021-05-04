@@ -1,14 +1,14 @@
 import store from "../../stores/userStore";
 
 class UserService {
-  static async createUser(user) {
+  async createUser(user) {
     try {
       // const response = await store.add(user);
       // return response;
       return await store.add(user);
     } catch (error) {}
   }
-  static async findUser(req, res) {
+  async findUser(req, res) {
     try {
       const username = req.body.name;
       const password = req.body.password;
@@ -19,4 +19,4 @@ class UserService {
   }
 }
 
-export default UserService;
+export default new UserService();

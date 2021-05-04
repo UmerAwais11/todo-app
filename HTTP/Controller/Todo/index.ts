@@ -5,7 +5,7 @@ import TodoService from "../../../App/services/Todo/todoService";
 
 class TodoController {
   // fetch all existing todos
-  static async homeRoutes(req, res) {
+  async homeRoutes(req, res) {
     console.log("LOGIN CREDENTIALS: ", req.session.user);
     try {
       if (!req.session.user) {
@@ -22,11 +22,11 @@ class TodoController {
     }
   }
 
-  static addTodoTask(req, res) {
+  addTodoTask(req, res) {
     res.render("add_todotask");
   }
 
-  static async updateTodoTask(req, res) {
+  async updateTodoTask(req, res) {
     try {
       const response = await TodoService.updateTodoTask(req);
       if (response) {
@@ -37,7 +37,7 @@ class TodoController {
     }
   }
 
-  static async create(req, res) {
+  async create(req, res) {
     try {
       const todo = new todoList({
         id: v4(),
@@ -61,7 +61,7 @@ class TodoController {
   }
 
   // retrieve and return all todos / retrieve and return a single todo-task
-  static async find(req, res) {
+  async find(req, res) {
     try {
       if (req.query.id) {
         const id = req.query.id;
@@ -88,7 +88,7 @@ class TodoController {
     }
   }
 
-  static async update(req, res) {
+  async update(req, res) {
     try {
       const id = req.params.id;
       const data = await TodoService.updateTodo(id, req);
@@ -104,7 +104,7 @@ class TodoController {
     }
   }
 
-  static async delete(req, res) {
+  async delete(req, res) {
     try {
       const id = req.params.id;
       const data = await TodoService.deleteTodo(id);
@@ -124,4 +124,4 @@ class TodoController {
     }
   }
 }
-export default TodoController;
+export default new TodoController();

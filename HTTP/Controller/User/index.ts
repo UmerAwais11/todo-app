@@ -1,14 +1,14 @@
-import {v4 } from "uuid";
+import { v4 } from "uuid";
 import userDb from "../../../App/database/model/user";
 import UserService from "../../../App/services/User/userService";
 
 class UserController {
   //redirect to login form
-  static loginForm(req, res) {
+  loginForm(req, res) {
     res.render("login");
   }
 
-  static async createUser(req, res) {
+  async createUser(req, res) {
     try {
       const user = new userDb({
         id: v4(),
@@ -25,7 +25,7 @@ class UserController {
       });
     }
   }
-  static async findUser(req, res) {
+  async findUser(req, res) {
     //const{name : username , password}= req.body
     try {
       const user = await UserService.findUser(req, res);
@@ -42,4 +42,4 @@ class UserController {
     }
   }
 }
-export default UserController;
+export default new UserController();
