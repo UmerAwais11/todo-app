@@ -1,7 +1,3 @@
-// const express = require("express");
-// const route = express.Router();
-// const TodoController = require("../Controller/Todo/index");
-// const UserController = require("../Controller/User/index");
 import * as express from "express";
 import TodoController from "../Controller/Todo/index";
 import UserController from "../Controller/User/index";

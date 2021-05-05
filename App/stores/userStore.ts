@@ -1,17 +1,18 @@
-import userDb from "../database/model/user";
+import UserEntity from "../Domain/Entities/UserEntity";
+import FetchUserDTO from "../Application/services/User/FetchUserDTO";
+import userDb from "../Infrastructure/database/model/user";
 
-class UserRepository {
+class UserStore {
   //create
-  async add(user) {
-    // const response = await user.save(user);
-    // return response;
-    return await user.save(user);
+  async add(user: UserEntity) {
+    return await userDb.create(user);
   }
-  async findUser(username, password) {
-    // const user = await userDb.findOne({ name: username, password: password });
-    // return unew ser;
-    return await userDb.findOne({ name: username, password: password });
+  async findUser(user: FetchUserDTO) {
+    return await userDb.findOne({
+      name: user.username,
+      password: user.password,
+    });
   }
 }
 
-export default new UserRepository();
+export default new UserStore();

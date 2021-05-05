@@ -1,44 +1,38 @@
-import { v4 } from "uuid";
-import userDb from "../../../App/database/model/user";
-import UserService from "../../../App/services/User/userService";
+import CreateUserDTO from "../../../App/Application/services/User/CreateUserTodo";
+import FetchUserDTO from "../../../App/Application/services/User/FetchUserDTO";
+import UserService from "../../../App/Application/services/User/userService";
+import logger from "../../../App/Infrastructure/Logger/logger";
 
 class UserController {
   //redirect to login form
-  loginForm(req, res) {
+  loginForm(res) {
     res.render("login");
   }
 
-  async createUser(req, res) {
+  async createUser(req) {
     try {
-      const user = new userDb({
-        id: v4(),
-        name: req.body.name,
-        password: req.body.password,
-      });
-      const userData = await UserService.createUser(user);
-      if (userData) {
-        return res.redirect("/");
-      }
-    } catch (err) {
-      res.status(500).send({
-        message: err.message || "Some error occurred while creating a user",
-      });
+      const input = new CreateUserDTO(req);
+      return await UserService.createUser(input);
+    } catch (error) {
+      logger.error(
+        `Unable to create user because of the following error [ ${error} ]`
+      );
     }
   }
   async findUser(req, res) {
-    //const{name : username , password}= req.body
     try {
-      const user = await UserService.findUser(req, res);
+      const input = new FetchUserDTO(req);
+      const user = await UserService.findUser(input);
       if (!user) {
         return res.render("login");
       }
       req.session.user = user;
-      console.log("LOGIN CREDENTIALS 1: ", req.session.user);
+      logger.info(`LOGIN CREDENTIALS 1: ${req.session.user}`);
       res.redirect("/");
-    } catch (err) {
-      return res
-        .status(500)
-        .send({ message: "Server Responded with an error" });
+    } catch (error) {
+      logger.error(
+        `Unable to find user because of the following error [ ${error} ]`
+      );
     }
   }
 }

@@ -1,5 +1,5 @@
-// const mongoose = require('mongoose');
 import * as mongoose from "mongoose";
+import logger from "../Logger/logger";
 
 const connectDB = async () => {
   try {
@@ -10,10 +10,11 @@ const connectDB = async () => {
       useFindAndModify: false,
       useCreateIndex: true,
     });
-
-    console.log(`MongoDB connected : ${con.connection.host}`);
-  } catch (err) {
-    console.log(err);
+    logger.info(`MongoDB connected : [ ${con.connection.host} ]`);
+  } catch (error) {
+    logger.error(
+      `Unable to connect to database because of the following error [ ${error} ]`
+    );
     process.exit(1);
   }
 };

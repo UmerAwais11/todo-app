@@ -1,39 +1,31 @@
-import todoList from "../database/model/todo";
+import TodoEntity from "../Domain/Entities/TodoEntity";
+import FetchTodoByIdDTO from "../Application/services/Todo/FetchTodoByIdDTO";
+import DeleteTodoDTO from "../Application/services/Todo/DeleteTodoDTO";
+import todoList from "../Infrastructure/database/model/todo";
 
-class TodoRepository {
+class TodoStore {
   //create
-  async add(todo) {
-    // const data = await todoList.create(todo);
-    // return data;
+  async add(todo: TodoEntity) {
     return await todoList.create(todo);
   }
   //fetchAllTodos
   async fetchAll() {
-    // const todo = await todoList.find();
-    // return todo;
     return await todoList.find();
   }
   //findById
-  async fetchByToDoId(id) {
-    // const todo = await todoList.findById(id);
-    // return todo;
-    return await todoList.findById(id);
+  async fetchByToDoId(todo: FetchTodoByIdDTO) {
+    return await todoList.findById(todo.id);
   }
-  async update(id, req) {
-    // const data = await todoList.findByIdAndUpdate(id, req.body, {
-    //   useFindAndModify: false,
-    // });
-    // return data;
-    return await todoList.findByIdAndUpdate(id, req.body, {
+  async update(todo: TodoEntity) {
+    return await todoList.findByIdAndUpdate(todo.id, todo, {
       useFindAndModify: false,
     });
   }
   //delete
-  async remove(id) {
-    // const data = await todoList.findByIdAndDelete(id);
-    // return data;
-    return await todoList.findByIdAndDelete(id);
+  async remove(todo: DeleteTodoDTO) {
+    const data = await todoList.findByIdAndDelete(todo.id);
+    return data;
   }
 }
 
-export default new TodoRepository();
+export default new TodoStore();

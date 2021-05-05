@@ -1,24 +1,27 @@
-//const { v4 } = require("uuid");
-import { v4 } from "uuid";
-import todoList from "../../../App/database/model/todo";
-import TodoService from "../../../App/services/Todo/todoService";
+import CreateTodoDTO from "../../../App/Application/services/Todo/CreateTodoDTO";
+import FetchTodoByIdDTO from "../../../App/Application/services/Todo/FetchTodoByIdDTO";
+import UpdateTodoDTO from "../../../App/Application/services/Todo/UpdateTodoDTO";
+import DeleteTodoDTO from "../../../App/Application/services/Todo/DeleteTodoDTO";
+import TodoService from "../../../App/Application/services/Todo/todoService";
+import logger from "../../../App/Infrastructure/Logger/logger";
 
 class TodoController {
   // fetch all existing todos
   async homeRoutes(req, res) {
-    console.log("LOGIN CREDENTIALS: ", req.session.user);
+    logger.info(`LOGIN CREDENTIALS: ${req.session.user}`);
     try {
       if (!req.session.user) {
         res.render("login");
       } else {
-        // Make a get request to /api/todos
-        const response = await TodoService.redirectToHome();
-        if (response) {
-          res.render("index", { todos: response.data });
+        const todo = await TodoService.fetchAllTodos();
+        if (todo) {
+          res.render("index", { todos: todo });
         }
       }
-    } catch (err) {
-      res.send(err);
+    } catch (error) {
+      logger.error(
+        `Unable to redirect to home because of following error [ ${error} ]`
+      );
     }
   }
 
@@ -28,50 +31,44 @@ class TodoController {
 
   async updateTodoTask(req, res) {
     try {
-      const response = await TodoService.updateTodoTask(req);
-      if (response) {
-        res.render("update_todotask", { todo: response.data });
+      const input = new FetchTodoByIdDTO(req);
+      const todo = await TodoService.fetchTodoById(input);
+      if (todo) {
+        res.render("update_todotask", { todo: todo });
       }
-    } catch (err) {
-      res.send(err);
+    } catch (error) {
+      logger.error(
+        `Unable to get todo task because of following error [ ${error} ]`
+      );
     }
   }
 
-  async create(req, res) {
+  async create(req, res): Promise<any> {
     try {
-      const todo = new todoList({
-        id: v4(),
-        name: req.body.name,
-        description: req.body.description,
-        priority: req.body.priority,
-        status: req.body.status,
-      });
-      const response = await TodoService.createTodoTask(todo);
-      if (response) {
+      const input = new CreateTodoDTO(req);
+      const todo = await TodoService.createTodoTask(input);
+      if (todo) {
         res.redirect("/add-todotask");
       }
       return;
-    } catch (err) {
-      res.status(500).send({
-        message:
-          err.message ||
-          "Some error occurred while creating a create operation",
-      });
+    } catch (error) {
+      logger.error(
+        `Unable to update todo task because of following error [ ${error} ]`
+      );
     }
   }
 
-  // retrieve and return all todos / retrieve and return a single todo-task
   async find(req, res) {
     try {
       if (req.query.id) {
-        const id = req.query.id;
-        const todo = await TodoService.fetchTodoById(id);
+        const input = new FetchTodoByIdDTO(req);
+        const todo = await TodoService.fetchTodoById(input);
         if (!todo) {
           res
             .status(404)
-            .send({ message: "Todo-task not found with id " + id });
+            .send({ message: "Todo-task not found with id " + todo });
         } else {
-          res.send(todo);
+          return todo;
         }
       } else {
         const todo = await TodoService.fetchAllTodos();
@@ -80,47 +77,51 @@ class TodoController {
             message: `Cannot find any todo-task.`,
           });
         } else {
-          res.send(todo);
+          return todo;
         }
       }
-    } catch (err) {
-      res.send(err);
+    } catch (error) {
+      logger.error(
+        `Unable to find todo task because of following error [ ${error} ]`
+      );
     }
   }
 
   async update(req, res) {
     try {
-      const id = req.params.id;
-      const data = await TodoService.updateTodo(id, req);
+      const input = new UpdateTodoDTO(req);
+      const data = await TodoService.updateTodo(input);
       if (!data) {
         res.status(404).send({
-          message: `Cannot Update todo-task with ${id}. Maybe todo-task not found!`,
+          message: `Cannot Update todo-task.`,
         });
       } else {
         res.send(data);
       }
-    } catch (err) {
-      res.status(500).send({ message: "Error updating todo-task information" });
+    } catch (error) {
+      logger.error(
+        `Unable to update todo task because of following error [ ${error} ]`
+      );
     }
   }
 
   async delete(req, res) {
     try {
-      const id = req.params.id;
-      const data = await TodoService.deleteTodo(id);
+      const input = new DeleteTodoDTO(req);
+      const data = await TodoService.deleteTodo(input);
       if (!data) {
         res.status(404).send({
-          message: `Cannot Delete with id ${id}. Maybe id is wrong`,
+          message: `Cannot Delete with id ${input}. Maybe id is wrong`,
         });
       } else {
         res.send({
           message: "Todo-task was deleted successfully!",
         });
       }
-    } catch (err) {
-      res.status(500).send({
-        message: "Could not delete todo-task ",
-      });
+    } catch (error) {
+      logger.error(
+        `Unable to delete todo task because of following error [ ${error} ]`
+      );
     }
   }
 }
