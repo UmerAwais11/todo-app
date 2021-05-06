@@ -4,18 +4,18 @@ import CreateUserDTO from "./CreateUserTodo";
 import FetchUserDTO from "./FetchUserDTO";
 
 class UserService {
-  async createUser(input: CreateUserDTO) {
+  async createUser(createUserDTO: CreateUserDTO) {
     try {
-      return await store.add(input.user);
+      return await store.add(createUserDTO.user);
     } catch (error) {
       logger.error(
         `Unable to create user because of the following error [ ${error} ]`
       );
     }
   }
-  async findUser(input: FetchUserDTO) {
+  async findUser(fetchUserDTO: FetchUserDTO) {
     try {
-      return await store.findUser(input);
+      return await store.findUser(fetchUserDTO);
     } catch (error) {
       logger.error(
         `Unable to find user because of the following error [ ${error} ]`

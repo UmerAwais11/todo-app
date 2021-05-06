@@ -43,7 +43,7 @@ class TodoController {
     }
   }
 
-  async create(req, res): Promise<any> {
+  async create(req, res) {
     try {
       const input = new CreateTodoDTO(req);
       const todo = await TodoService.createTodoTask(input);

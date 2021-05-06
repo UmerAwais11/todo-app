@@ -6,9 +6,9 @@ import UpdateTodoByIdDTO from "./UpdateTodoDTO";
 import DeleteTodoDTO from "./DeleteTodoDTO";
 
 class TodoService {
-  async createTodoTask(input: CreateTodoDTO) {
+  async createTodoTask(createTodoDTO: CreateTodoDTO) {
     try {
-      return await store.add(input.todo);
+      return await store.add(createTodoDTO.todo);
     } catch (error) {
       logger.error(
         `Unable to create todo task because of the following error [ ${error} ]`
@@ -24,27 +24,27 @@ class TodoService {
       );
     }
   }
-  async fetchTodoById(input: FetchTodoByIdDTO) {
+  async fetchTodoById(fetchTodoByIdDTO: FetchTodoByIdDTO) {
     try {
-      return await store.fetchByToDoId(input);
+      return await store.fetchByToDoId(fetchTodoByIdDTO);
     } catch (error) {
       logger.error(
         `Unable to get todo task because of the following error [ ${error} ]`
       );
     }
   }
-  async updateTodo(input: UpdateTodoByIdDTO) {
+  async updateTodo(updateTodoByIdDTO: UpdateTodoByIdDTO) {
     try {
-      return await store.update(input.todo);
+      return await store.update(updateTodoByIdDTO.todo);
     } catch (error) {
       logger.error(
         `Unable to update todo task because of the following error [ ${error} ]`
       );
     }
   }
-  async deleteTodo(input: DeleteTodoDTO) {
+  async deleteTodo(deleteTodoDTO: DeleteTodoDTO) {
     try {
-      return await store.remove(input);
+      return await store.remove(deleteTodoDTO);
     } catch (error) {
       logger.error(
         `Unable to delete todo task because of the following error [ ${error} ]`
