@@ -1,6 +1,6 @@
 import * as path from "path";
 
-const loadStatic = async (app, express) => {
+const loadStatic = (app, express) => {
   app.use("/css", express.static(path.resolve(__dirname, "../../assets/css")));
   app.use("/js", express.static(path.resolve(__dirname, "../../assets/js")));
 };
