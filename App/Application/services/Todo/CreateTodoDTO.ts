@@ -6,8 +6,14 @@ class CreateTodoDTO {
   constructor(request) {
     const params = request.body;
     params.id = TodoEntity.generateId();
-
-    this.todo = TodoEntity.createFromInput(params);
+    this.todo = new TodoEntity(
+      params.id,
+      params.name,
+      params.description,
+      params.priority,
+      params.status
+    );
+    //this.todo = TodoEntity.createFromInput(params);
   }
 }
 
