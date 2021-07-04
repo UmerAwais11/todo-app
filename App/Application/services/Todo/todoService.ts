@@ -1,4 +1,4 @@
-import store from "../../../stores/todoStore";
+import store from "../../../Infrastructure/stores/todoStore";
 import logger from "../../../Infrastructure/Logger/logger";
 import CreateTodoDTO from "./CreateTodoDTO";
 import FetchTodoByIdDTO from "./FetchTodoByIdDTO";
