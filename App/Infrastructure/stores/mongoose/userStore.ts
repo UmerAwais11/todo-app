@@ -1,6 +1,6 @@
-import UserEntity from "../../Domain/Entities/UserEntity";
-import FetchUserDTO from "../../Application/services/User/FetchUserDTO";
-import userDb from "../database/model/user";
+import UserEntity from "../../../Domain/Entities/UserEntity";
+import FetchUserDTO from "../../../Application/services/User/FetchUserDTO";
+import userDb from "../../database/models/mongoose/user";
 
 class UserStore {
   //create

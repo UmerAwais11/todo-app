@@ -1,7 +1,7 @@
-import TodoEntity from "../../Domain/Entities/TodoEntity";
-import FetchTodoByIdDTO from "../../Application/services/Todo/FetchTodoByIdDTO";
-import DeleteTodoDTO from "../../Application/services/Todo/DeleteTodoDTO";
-import todoList from "../database/model/todo";
+import TodoEntity from "../../../Domain/Entities/TodoEntity";
+import FetchTodoByIdDTO from "../../../Application/services/Todo/FetchTodoByIdDTO";
+import DeleteTodoDTO from "../../../Application/services/Todo/DeleteTodoDTO";
+import todoList from "../../database/models/mongoose/todo";
 
 class TodoStore {
   //create
