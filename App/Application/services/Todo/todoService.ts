@@ -1,11 +1,10 @@
-const store = require ("../../../Infrastructure/stores/todoStore");
 const todoFactory = require("../../../Infrastructure/factories/todoFactory");
 import logger from "../../../Infrastructure/Logger/logger";
 import CreateTodoDTO from "./CreateTodoDTO";
 import FetchTodoByIdDTO from "./FetchTodoByIdDTO";
 import UpdateTodoByIdDTO from "./UpdateTodoDTO";
 import DeleteTodoDTO from "./DeleteTodoDTO";
-// const store = todoFactory.buildToDoStore();
+const store = todoFactory.buildToDoStore();
 
 class TodoService {
   async createTodoTask(createTodoDTO: CreateTodoDTO) {

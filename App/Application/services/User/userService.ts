@@ -1,8 +1,9 @@
 import logger from "../../../Infrastructure/Logger/logger";
-import store from "../../../Infrastructure/stores/userStore";
+const userFactory = require("../../../Infrastructure/factories/userFactory");
 import CreateUserDTO from "./CreateUserTodo";
 import FetchUserDTO from "./FetchUserDTO";
 import UserEntity from "../../../Domain/Entities/UserEntity";
+const store = userFactory.buildUserStore();
 
 class UserService {
 

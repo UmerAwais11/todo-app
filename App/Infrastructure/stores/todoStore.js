@@ -1,12 +1,12 @@
 class ToDoStore {
     static buildMongooseToDoStore() {
         const MongooseToDoStore = require("./mongoose/todoStore");
-        return new MongooseToDoStore();
+        return MongooseToDoStore;
     }
 
     static buildSequelizeToDoStore() {
         const SequelizeToDoStore = require("./sequelize/todoStore");
-        return new SequelizeToDoStore();
+        return SequelizeToDoStore;
     }
 }
 module.exports = ToDoStore;

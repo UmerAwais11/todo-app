@@ -1,12 +1,12 @@
 class UserStore {
     static buildMongooseUserStore() {
         const MongooseUserStore = require("./mongoose/userStore");
-        return new MongooseUserStore();
+        return MongooseUserStore;
     }
 
     static buildSequelizeUserStore() {
         const SequelizeUserStore = require("./sequelize/userStore");
-        return new SequelizeUserStore();
+        return SequelizeUserStore;
     }
 }
 module.exports = UserStore;
