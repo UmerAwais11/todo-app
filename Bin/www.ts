@@ -1,5 +1,5 @@
 import { Command } from "commander";
-import connectDB from "../App/Infrastructure/database/connection";
+const connectDB = require("../App/Infrastructure/database/dbConnection");
 import logger from "../App/Infrastructure/Logger/logger";
 import app from "../HTTP/Bootstrap/app";
 

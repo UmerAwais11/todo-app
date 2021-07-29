@@ -1,5 +1,5 @@
 import logger from "../../App/Infrastructure/Logger/logger";
-import GoogleAuthService from "../../App/Infrastructure/services/googleAuthService";
+const GoogleAuthService = require( "../../App/Infrastructure/services/googleAuthService");
 const googleAuthService = new GoogleAuthService();
 
 module.exports.getAccount = async function (req, res) {
