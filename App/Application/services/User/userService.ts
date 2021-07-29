@@ -1,4 +1,5 @@
 import logger from "../../../Infrastructure/Logger/logger";
+const JwtAuthService = require("../../Infrastructure/services/jwtAuthService");
 const userFactory = require("../../../Infrastructure/factories/userFactory");
 import CreateUserDTO from "./CreateUserTodo";
 import FetchUserDTO from "./FetchUserDTO";
@@ -9,13 +10,16 @@ class UserService {
 
   async authUser (params) {
     try{
+      const jwtAuthService = new JwtAuthService();
       const userIsPresent = await store.findUser(params);
       if (userIsPresent) {
-        return userIsPresent;
+        return { token: jwtAuthService.generateJwtToken(userIsPresent.id) };
+        //return userIsPresent;
       }
       const user = UserEntity.createFromInput(params);
       const newUser = await store.add(user);
-      return newUser;
+      return { token: jwtAuthService.generateJwtToken(user.id) };
+      //return newUser;
     }
     catch (error){
       logger.error(

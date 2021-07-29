@@ -13,6 +13,9 @@ class UserStore {
       password: user.password,
     });
   }
+  async userIsPresent(userID) {
+    return await userDb.exists({ id: userID });
+  }
 }
 
 export default new UserStore();
