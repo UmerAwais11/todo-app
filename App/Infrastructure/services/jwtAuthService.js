@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const appError = require("../../../HTTP/errors/appError");
+import logger from "../../Infrastructure/Logger/logger";
 const AuthService = require("./authService");
 const UserFactory = require("../../Infrastructure/factories/userFactory");
 const store = UserFactory.buildUserStore();
@@ -10,11 +10,15 @@ class JwtAuthService extends AuthService {
     async validateUserCredentials(params) {
         const userIsPresent = await store.findUser(params);
         if (!userIsPresent) {
-            throw new appError("Invalid Email.", 400);
+            logger.error(
+                `Unable to authenticate user because of Invalid Email. ]`
+            );
         }
 
         if (!bcrypt.compare(params.password, userIsPresent.password)) {
-            throw new appError("Invalid Password.", 400);
+            logger.error(
+                `Unable to authenticate user because of Invalid Password. ]`
+            );
         }
         return { token: this.generateJwtToken(userIsPresent.id) };
     }

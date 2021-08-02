@@ -1,5 +1,5 @@
 const Jwt = require("jsonwebtoken");
-const appError = require("../../../HTTP/errors/appError");
+import logger from "../../Infrastructure/Logger/logger";
 const { application } = require("../../Infrastructure/config");
 const UserFactory = require("../../Infrastructure/factories/userFactory");
 const store = UserFactory.buildUserStore();
@@ -10,14 +10,18 @@ class AuthService {
     userHasAuthorization(req) {
         const token = req.headers["x-access-token"] || req.headers["authorization"];
         if (!token) {
-            throw new appError("Access denied. No token provided.", 400);
+            logger.error(
+                `Access denied because of no token provided. ]`
+            );
         }
 
         try {
             const decoded = Jwt.verify(token, application.myPrivateKey);
             return store.userIsPresent(decoded.id);
-        } catch (ex) {
-            throw new appError(ex, 400);
+        } catch (error) {
+            logger.error(
+            `Unable to authenticate user because of the following error [ ${error} ]`
+            );
         }
     }
 

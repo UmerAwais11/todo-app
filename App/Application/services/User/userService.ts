@@ -1,5 +1,5 @@
 import logger from "../../../Infrastructure/Logger/logger";
-const JwtAuthService = require("../../Infrastructure/services/jwtAuthService");
+const JwtAuthService = require("../../../Infrastructure/services/jwtAuthService");
 const userFactory = require("../../../Infrastructure/factories/userFactory");
 import CreateUserDTO from "./CreateUserTodo";
 import FetchUserDTO from "./FetchUserDTO";
